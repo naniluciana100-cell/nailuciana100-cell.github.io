@@ -1,0 +1,153 @@
+---
+title: "U.S. Unemployment Forecasting by Age Group"
+format: dashboard
+---
+
+# Overview
+## Row {height=35%}
+Welcome to my ECON 5371 Time Series Analysis dashboard.
+
+This project examines U.S. unemployment rates for four age groups:
+
+- Ages 16–19
+- Ages 20–24
+- Ages 25–34
+- Ages 55+
+
+The analysis uses monthly unemployment data from FRED and ARIMA models to examine historical trends and forecast future unemployment rates.
+
+```{python}
+#| include: false
+
+from pathlib import Path
+import pandas as pd
+import matplotlib.pyplot as plt
+
+DATA_PATH = Path("../data/clean/unemployment_clean.csv")
+
+df = pd.read_csv(DATA_PATH)
+
+print("Data loaded successfully!")
+print("Rows:", len(df))
+```
+## Row {height=65%}
+```{python}
+#| content: valuebox
+#| title: "Total Observations"
+#| icon: database
+#| color: primary
+
+dict(value=f"{len(df):,}")
+```
+
+
+```{python}
+#| content: valuebox
+#| title: "Sample Period"
+#| icon: calendar
+#| color: secondary
+
+dates = pd.to_datetime(df["observation_date"])
+
+start_date = dates.min().strftime("%b %Y")
+end_date = dates.max().strftime("%b %Y")
+
+dict(value=f"{start_date} – {end_date}")
+```
+
+
+```{python}
+#| content: valuebox
+#| title: "Age Groups Analyzed"
+#| icon: people
+#| color: primary
+
+dict(value=df["age_group"].nunique())
+```
+
+# Historical Unemployment Trends
+
+```{python}
+#| title: "U.S. Unemployment Rates by Age Group"
+#| echo: false
+
+fig, ax = plt.subplots(figsize=(11, 5))
+
+for group, data in df.groupby("age_group"):
+    data = data.sort_values("observation_date")
+    ax.plot(
+        pd.to_datetime(data["observation_date"]),
+        data["unemployment_rate"],
+        label=f"Ages {group}"
+    )
+
+ax.set_title("U.S. Unemployment Rates by Age Group")
+ax.set_xlabel("Year")
+ax.set_ylabel("Unemployment Rate (%)")
+ax.legend(title="Age Group")
+ax.grid(alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+```
+
+# ARIMA Model Results
+
+```{python}
+#| title: "ARIMA Model Comparison"
+#| echo: false
+
+model_results = pd.read_csv("../model_summary.csv")
+
+model_results
+```
+
+# ARIMA Forecasts
+
+```{python}
+#| title: "12-Month Unemployment Forecast: Ages 16–19"
+#| echo: false
+
+forecast = pd.read_csv("../unemployment_forecast.csv")
+forecast.columns = forecast.columns.str.strip()
+forecast_dates = pd.to_datetime(forecast.iloc[:, 0])
+
+fig, ax = plt.subplots(figsize=(11, 5))
+
+ax.plot(
+    forecast_dates,
+    forecast["Forecast"],
+    label="ARIMA Forecast",
+    color="blue",
+    linewidth=2
+)
+
+ax.fill_between(
+    forecast_dates,
+    forecast["Lower CI"],
+    forecast["Upper CI"],
+    color="blue",
+    alpha=0.2,
+    label="Confidence Interval"
+)
+
+ax.set_title("12-Month Unemployment Forecast: Ages 16–19")
+ax.set_xlabel("Month")
+ax.set_ylabel("Unemployment Rate (%)")
+ax.legend()
+ax.grid(alpha=0.3)
+
+ax.tick_params(axis="x", labelrotation=45)
+plt.tight_layout()
+plt.show()
+```
+# Project Resources
+
+### GitHub Repository
+
+[View my unemployment forecasting project on GitHub](https://github.com/nailuciana100-cell/nailuciana100-cell.github.io/tree/main/unemployment_project)
+
+
+
+
+
