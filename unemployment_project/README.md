@@ -58,3 +58,11 @@ The analysis uses relative paths within the project folder. The notebook generat
 
 ## AI Use Disclosure
 AI assistance was used for coding guidance, fixing errors, and organizing project files. The analysis and results should be reviewed by teacher or student.
+
+## Live Dashboard
+
+View my U.S. Unemployment Forecasting Dashboard here:
+
+[Open Unemployment Forecasting Dashboard](https://naniluciana100-cell.github.io/nailuciana100-cell.github.io/unemployment_project/docs/index.html)
+
+The dashboard includes historical unemployment trends for four age groups, ARIMA model results, and a 12-month unemployment forecast with confidence intervals.
