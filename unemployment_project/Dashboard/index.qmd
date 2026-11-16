@@ -65,6 +65,20 @@ dict(value=f"{start_date} – {end_date}")
 dict(value=df["age_group"].nunique())
 ```
 
+```{python}
+#| content: valuebox
+#| title: "RMSE: Ages 16–19"
+#| icon: activity
+#| color: success
+
+model_results = pd.read_csv("../output/model_summary.csv")
+teen_rmse = model_results.loc[
+    model_results["Age Group"].astype(str) == "16-19", "RMSE"
+].iloc[0]
+
+dict(value=f"{teen_rmse:.3f}")
+```
+
 # Historical Unemployment Trends
 
 ```{python}
