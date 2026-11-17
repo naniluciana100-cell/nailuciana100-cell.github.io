@@ -1,6 +1,7 @@
 project:
   type: website
-output-dir: docs
+  output-dir: docs
+
 website:
   title: "Economics Forecasting Project Luciana Galicia"
   navbar:
@@ -16,6 +17,3 @@ format:
       - brand
     css: styles.css
     toc: true
-
-
-
