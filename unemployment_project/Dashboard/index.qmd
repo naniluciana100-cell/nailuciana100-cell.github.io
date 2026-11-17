@@ -111,7 +111,7 @@ plt.show()
 #| title: "ARIMA Model Comparison"
 #| echo: false
 
-model_results = pd.read_csv("../model_summary.csv")
+model_results = pd.read_csv("../output/model_summary.csv")
 
 model_results
 ```
@@ -122,27 +122,21 @@ model_results
 #| title: "12-Month Unemployment Forecast: Ages 16–19"
 #| echo: false
 
-forecast = pd.read_csv("../unemployment_forecast.csv")
-forecast.columns = forecast.columns.str.strip()
-forecast_dates = pd.to_datetime(forecast.iloc[:, 0])
+forecast = pd.read_csv(
+    "../output/unemployment_forecast_16_19.csv",
+    index_col=0
+)
+
+forecast.index = pd.to_datetime(forecast.index)
 
 fig, ax = plt.subplots(figsize=(11, 5))
 
 ax.plot(
-    forecast_dates,
-    forecast["Forecast"],
+    forecast.index,
+    forecast["predicted_mean"],
     label="ARIMA Forecast",
     color="blue",
     linewidth=2
-)
-
-ax.fill_between(
-    forecast_dates,
-    forecast["Lower CI"],
-    forecast["Upper CI"],
-    color="blue",
-    alpha=0.2,
-    label="Confidence Interval"
 )
 
 ax.set_title("12-Month Unemployment Forecast: Ages 16–19")
@@ -155,6 +149,9 @@ ax.tick_params(axis="x", labelrotation=45)
 plt.tight_layout()
 plt.show()
 ```
+
+
+  
 # Project Resources
 
 ### GitHub Repository
