@@ -1,0 +1,5 @@
+Age Group,ARIMA Model,MAE,RMSE,Test Observations,Benchmark MAE,Benchmark RMSE,Better Model
+16-19,"(2, 1, 2)",0.955,1.224,11,0.936,1.174,Benchmark
+20-24,"(1, 1, 1)",1.11,1.232,11,1.691,1.847,ARIMA
+25-34,"(0, 1, 1)",0.321,0.351,11,0.318,0.348,Benchmark
+55+,"(1, 1, 1)",0.15,0.179,11,0.209,0.239,ARIMA
