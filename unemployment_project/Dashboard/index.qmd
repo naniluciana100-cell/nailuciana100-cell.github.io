@@ -71,7 +71,7 @@ dict(value=df["age_group"].nunique())
 #| icon: activity
 #| color: success
 
-model_results = pd.read_csv("../output/model_summary.csv")
+model_results = pd.read_csv("../output/corrected_results.csv")
 teen_rmse = model_results.loc[
     model_results["Age Group"].astype(str) == "16-19", "RMSE"
 ].iloc[0]
@@ -142,7 +142,7 @@ plt.show()
 #| title: "ARIMA Model Comparison"
 #| echo: false
 
-model_results = pd.read_csv("../output/model_summary.csv")
+model_results = pd.read_csv("../output/corrected_results.csv")
 
 model_results
 ```
