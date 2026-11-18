@@ -188,6 +188,129 @@ plt.tight_layout()
 plt.show()
 ```
 
+```{python}
+#| title: "12-Month Unemployment Forecast: Ages 20–24"
+#| echo: false
+
+forecast_20_24 = pd.read_csv(
+    "../output/unemployment_forecast_20_24.csv",
+    index_col=0
+)
+
+forecast_20_24.index = pd.to_datetime(forecast_20_24.index)
+
+fig, ax = plt.subplots(figsize=(11, 5))
+
+ax.plot(
+    forecast_20_24.index,
+    forecast_20_24["Forecast"],
+    label="ARIMA Forecast",
+    color="blue",
+    linewidth=2
+)
+
+ax.fill_between(
+    forecast_20_24.index,
+    forecast_20_24["Lower CI"],
+    forecast_20_24["Upper CI"],
+    color="blue",
+    alpha=0.2,
+    label="95% Confidence Interval"
+)
+
+ax.set_title("12-Month Unemployment Forecast: Ages 20–24")
+ax.set_xlabel("Month")
+ax.set_ylabel("Unemployment Rate (%)")
+ax.legend()
+ax.grid(alpha=0.3)
+ax.tick_params(axis="x", labelrotation=45)
+plt.tight_layout()
+plt.show()
+```
+
+
+```{python}
+#| title: "12-Month Unemployment Forecast: Ages 25–34"
+#| echo: false
+
+forecast_25_34 = pd.read_csv(
+    "../output/unemployment_forecast_25_34.csv",
+    index_col=0
+)
+
+forecast_25_34.index = pd.to_datetime(forecast_25_34.index)
+
+fig, ax = plt.subplots(figsize=(11, 5))
+
+ax.plot(
+    forecast_25_34.index,
+    forecast_25_34["Forecast"],
+    label="ARIMA Forecast",
+    color="blue",
+    linewidth=2
+)
+
+ax.fill_between(
+    forecast_25_34.index,
+    forecast_25_34["Lower CI"],
+    forecast_25_34["Upper CI"],
+    color="blue",
+    alpha=0.2,
+    label="95% Confidence Interval"
+)
+
+ax.set_title("12-Month Unemployment Forecast: Ages 25–34")
+ax.set_xlabel("Month")
+ax.set_ylabel("Unemployment Rate (%)")
+ax.legend()
+ax.grid(alpha=0.3)
+ax.tick_params(axis="x", labelrotation=45)
+
+plt.tight_layout()
+plt.show()
+```
+
+
+```{python}
+#| title: "12-Month Unemployment Forecast: Ages 55+"
+#| echo: false
+
+forecast_55 = pd.read_csv(
+    "../output/unemployment_forecast_55plus.csv",
+    index_col=0
+)
+
+forecast_55.index = pd.to_datetime(forecast_55.index)
+
+fig, ax = plt.subplots(figsize=(11, 5))
+
+ax.plot(
+    forecast_55.index,
+    forecast_55["Forecast"],
+    label="ARIMA Forecast",
+    color="blue",
+    linewidth=2
+)
+
+ax.fill_between(
+    forecast_55.index,
+    forecast_55["Lower CI"],
+    forecast_55["Upper CI"],
+    color="blue",
+    alpha=0.2,
+    label="95% Confidence Interval"
+)
+
+ax.set_title("12-Month Unemployment Forecast: Ages 55+")
+ax.set_xlabel("Month")
+ax.set_ylabel("Unemployment Rate (%)")
+ax.legend()
+ax.grid(alpha=0.3)
+ax.tick_params(axis="x", labelrotation=45)
+
+plt.tight_layout()
+plt.show()
+```
 
   
 # Project Resources
