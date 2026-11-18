@@ -133,12 +133,19 @@ fig, ax = plt.subplots(figsize=(11, 5))
 
 ax.plot(
     forecast.index,
-    forecast["predicted_mean"],
+    forecast["Forecast"],
     label="ARIMA Forecast",
     color="blue",
     linewidth=2
 )
-
+ax.fill_between(
+      forecast.index,
+    forecast["Lower CI"],
+    forecast["Upper CI"],
+    color="blue",
+    alpha=0.2,
+    label="95% Confidence Interval"
+)
 ax.set_title("12-Month Unemployment Forecast: Ages 16–19")
 ax.set_xlabel("Month")
 ax.set_ylabel("Unemployment Rate (%)")
