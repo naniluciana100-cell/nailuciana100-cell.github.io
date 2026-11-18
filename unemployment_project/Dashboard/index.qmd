@@ -194,7 +194,7 @@ plt.show()
 
 ### GitHub Repository
 
-[View my unemployment forecasting project on GitHub](https://github.com/nailuciana100-cell/nailuciana100-cell.github.io/tree/main/unemployment_project)
+[View my unemployment forecasting project on GitHub](https://github.com/naniluciana100-cell/nailuciana100-cell.github.io/tree/main/unemployment_project)
 
 
 
