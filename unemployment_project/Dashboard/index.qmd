@@ -1,10 +1,12 @@
 ---
 title: "U.S. Unemployment Forecasting by Age Group"
-format: dashboard
+format:
+  dashboard:
+    scrolling: true
 ---
 
 # Overview
-## Row {height=35%}
+## Row {height=auto}
 Welcome to my ECON 5371 Time Series Analysis dashboard.
 
 This project examines U.S. unemployment rates for four age groups:
@@ -30,7 +32,7 @@ df = pd.read_csv(DATA_PATH)
 print("Data loaded successfully!")
 print("Rows:", len(df))
 ```
-## Row {height=65%}
+## Row {height=50%}
 ```{python}
 #| content: valuebox
 #| title: "Total Observations"
@@ -81,11 +83,17 @@ dict(value=f"{teen_rmse:.3f}")
 
 # Historical Unemployment Trends
 
+## Row {height=50%}
+
 ```{python}
 #| title: "U.S. Unemployment Rates by Age Group"
 #| echo: false
-
-fig, ax = plt.subplots(figsize=(11, 5))
+#| fig-width: 14
+#| fig-height: 6
+#| out-width: 100%
+#| fig-align: default
+#| fig-responsive: false
+fig, ax = plt.subplots(figsize=(14, 6))
 
 for group, data in df.groupby("age_group"):
     data = data.sort_values("observation_date")
@@ -104,12 +112,15 @@ ax.grid(alpha=0.3)
 plt.tight_layout()
 plt.show()
 ```
-
+## Row {height=50%}
 ```{python}
 #| title: "Monthly Changes in Unemployment Rates by Age Group"
 #| echo: false
-
-fig, ax = plt.subplots(figsize=(11, 5))
+#| fig-width: 14
+#| fig-height: 6
+#| out-width: 100%
+#| fig-align: center
+fig, ax = plt.subplots(figsize=(14, 6))
 
 for group, data in df.groupby("age_group"):
     data = data.sort_values("observation_date").copy()
@@ -142,17 +153,27 @@ plt.show()
 #| title: "ARIMA Model Comparison"
 #| echo: false
 
-model_results = pd.read_csv("../output/corrected_results.csv")
+model_results = pd.read_csv("../output/model_summary.csv")
 
-model_results
+model_results.style.hide(axis="index").format({
+    "AIC": "{:.3f}",
+    "MAE": "{:.3f}",
+    "RMSE": "{:.3f}",
+    "Mean Forecast Error": "{:.3f}",
+    "Ljung-Box p-value": "{:.3f}"
+})
 ```
 
 # ARIMA Forecasts
 
+## Row {height=50%}
+
 ```{python}
 #| title: "12-Month Unemployment Forecast: Ages 16–19"
 #| echo: false
-
+#| fig-width: 11
+#| fig-height: 5
+#| column: screen
 forecast = pd.read_csv(
     "../output/unemployment_forecast_16_19.csv",
     index_col=0
@@ -160,7 +181,7 @@ forecast = pd.read_csv(
 
 forecast.index = pd.to_datetime(forecast.index)
 
-fig, ax = plt.subplots(figsize=(11, 5))
+fig, ax = plt.subplots(figsize=(14, 7))
 
 ax.plot(
     forecast.index,
@@ -191,7 +212,9 @@ plt.show()
 ```{python}
 #| title: "12-Month Unemployment Forecast: Ages 20–24"
 #| echo: false
-
+#| fig-width: 11
+#| fig-height: 5
+#| out-width: 100%
 forecast_20_24 = pd.read_csv(
     "../output/unemployment_forecast_20_24.csv",
     index_col=0
@@ -199,7 +222,7 @@ forecast_20_24 = pd.read_csv(
 
 forecast_20_24.index = pd.to_datetime(forecast_20_24.index)
 
-fig, ax = plt.subplots(figsize=(11, 5))
+fig, ax = plt.subplots(figsize=(14, 7))
 
 ax.plot(
     forecast_20_24.index,
@@ -228,11 +251,13 @@ plt.tight_layout()
 plt.show()
 ```
 
-
+## Row {height=50%}
 ```{python}
 #| title: "12-Month Unemployment Forecast: Ages 25–34"
 #| echo: false
-
+#| fig-width: 11
+#| fig-height: 5
+#| out-width: 100%
 forecast_25_34 = pd.read_csv(
     "../output/unemployment_forecast_25_34.csv",
     index_col=0
@@ -240,7 +265,7 @@ forecast_25_34 = pd.read_csv(
 
 forecast_25_34.index = pd.to_datetime(forecast_25_34.index)
 
-fig, ax = plt.subplots(figsize=(11, 5))
+fig, ax = plt.subplots(figsize=(14, 7))
 
 ax.plot(
     forecast_25_34.index,
@@ -274,7 +299,9 @@ plt.show()
 ```{python}
 #| title: "12-Month Unemployment Forecast: Ages 55+"
 #| echo: false
-
+#| fig-width: 11
+#| fig-height: 5
+#| out-width: 100%
 forecast_55 = pd.read_csv(
     "../output/unemployment_forecast_55plus.csv",
     index_col=0
@@ -282,7 +309,7 @@ forecast_55 = pd.read_csv(
 
 forecast_55.index = pd.to_datetime(forecast_55.index)
 
-fig, ax = plt.subplots(figsize=(11, 5))
+fig, ax = plt.subplots(figsize=(14, 7))
 
 ax.plot(
     forecast_55.index,
@@ -319,6 +346,17 @@ plt.show()
 
 [View my unemployment forecasting project on GitHub](https://github.com/naniluciana100-cell/nailuciana100-cell.github.io/tree/main/unemployment_project)
 
+### Data Source
+
+Unemployment data were obtained from the Federal Reserve Economic Data (FRED) database.
+
+[Visit FRED](https://fred.stlouisfed.org/)
+
+### Forecasting Method
+
+This project uses ARIMA models to analyze and forecast unemployment rates for four age groups: 16–19, 20–24, 25–34, and 55+.
+
+Each model produces a 12-month unemployment forecast with a 95% confidence interval. Model accuracy is evaluated using Mean Absolute Error (MAE) and Root Mean Squared Error (RMSE).
 
 
 
