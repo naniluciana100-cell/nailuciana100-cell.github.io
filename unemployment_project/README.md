@@ -39,7 +39,7 @@ The analysis uses:
 | 55+ | (1,1,1) | 625.658 |
 
 ## Project Files
-- `data/raw/`: Original unemployment datasets
+- `data/Raw/`: Original unemployment datasets
 - `data/clean/`: Cleaned unemployment dataset
 - `code/`: Python analysis notebook
 - `output/`: Forecast tables, model results, and graphs
@@ -57,12 +57,11 @@ The analysis uses:
 The analysis uses relative paths within the project folder. The notebook generates model results, forecast tables, and figures from the unemployment data.
 
 ## AI Use Disclosure
-AI assistance was used for coding guidance, fixing errors, and organizing project files. The analysis and results should be reviewed by teacher or student.
+AI assistance was used for coding guidance, fixing errors, and organizing project files. I reviewed the code, analysis, and results to ensure they accurately reflect my project.
 
 ## Live Dashboard
 
 View my U.S. Unemployment Forecasting Dashboard here:
 
-[Open Unemployment Forecasting Dashboard](https://naniluciana100-cell.github.io/nailuciana100-cell.github.io/unemployment_project/docs/index.html)
-
+[Open Unemployment Forecasting Dashboard](https://naniluciana100-cell.github.io/nailuciana100-cell.github.io/unemployment_project/Dashboard/)
 The dashboard includes historical unemployment trends for four age groups, ARIMA model results, and a 12-month unemployment forecast with confidence intervals.
